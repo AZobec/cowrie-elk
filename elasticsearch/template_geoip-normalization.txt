@@ -1,0 +1,40 @@
+PUT _template/geoip_normalization
+{
+    "index_patterns" : [
+      "*"
+    ],
+    "mappings" : {
+      "_source" : {
+        "enabled" : true
+      },
+      "properties" : {
+        "geoip" : {
+          "dynamic" : true,
+          "type" : "object",
+          "properties" : {
+            "ip" : {
+              "type" : "ip",
+              "doc_values" : true
+            },
+            "latitude" : {
+              "type" : "float",
+              "doc_values" : true
+            },
+            "location" : {
+              "type" : "geo_point",
+              "doc_values" : true
+            },
+            "longitude" : {
+              "type" : "float",
+              "doc_values" : true
+            }
+          }
+        },
+        "created_at" : {
+          "format" : "EEE MMM dd HH:mm:ss Z yyyy",
+          "type" : "date"
+        }
+      }
+    },
+    "aliases" : { }
+  }
